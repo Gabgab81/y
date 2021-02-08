@@ -1,0 +1,28 @@
+<h1>Result</h1>
+
+<p> <%= @test %> </p>
+
+<% if !@goodword %>
+  <p> Sorry but <strong><%= @answer.downcase %></strong> can't be build out of
+  <% @letters.each do |letter| %>
+    <% if @letters.last == letter %>
+      <%= letter %>
+    <% else%>
+      <%= letter %>,
+    <% end %>
+  <% end %>
+  </p>
+<% elsif !@englishword %>
+  <p> Sorry but <strong><%= @answer.downcase %></strong> does not seem to be a valid English word... </p>
+<% else %>
+  <p> <strong>Congratulation</strong> <%= @answer.downcase %> is a valide Englidh word. Your score is <%= @score %> </p>
+<% end %>
+
+<h2>Last scores</h2>
+<% if session[:score] != nil %>
+  <% session[:score].each do |element| %>
+      <p>Score: <%= element["score"]%> le <%= element["date"]%> </p>
+  <% end %>  
+<% end %>
+
+<%= link_to "Play again", new_path %>
